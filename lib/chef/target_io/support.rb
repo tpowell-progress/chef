@@ -59,7 +59,8 @@ module TargetIO
     end
 
     def sudo?
-      transport_connection.transport_options[:sudo]
+      transport_connection.respond_to?(:transport_options) &&
+        transport_connection.transport_options[:sudo]
     end
 
     def remote_user

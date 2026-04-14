@@ -23,7 +23,9 @@ class Chef
 
       set_guard_inherited_attributes(:interpreter, :use_inline_powershell)
 
-      provides :powershell_script, os: "windows"
+      provides :powershell_script, os: "windows", target_mode: true
+      target_mode support: :full,
+        description: "Requires PowerShell available on the target node."
 
       description <<~DESC
         Use the **powershell_script** resource to execute a script using the Windows PowerShell interpreter, much like how the script and script-based resources **bash**, **csh**, **perl**, **python**, and **ruby** are used. The **powershell_script** resource is specific to the Microsoft Windows platform, but may use both the Windows PowerShell interpreter or the PowerShell Core (pwsh) interpreter as of Chef Infra Client 16.6 and later.

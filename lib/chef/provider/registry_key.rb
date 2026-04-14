@@ -31,7 +31,7 @@ class Chef
 
   class Provider
     class RegistryKey < Chef::Provider
-      provides :registry_key
+      provides :registry_key, target_mode: true
 
       include Chef::Mixin::Checksum
 
@@ -44,11 +44,18 @@ class Chef
       end
 
       def load_current_resource
-        running_on_windows!
         @current_resource ||= Chef::Resource::RegistryKey.new(new_resource.key, run_context)
         current_resource.key(new_resource.key)
         current_resource.architecture(new_resource.architecture)
         current_resource.recursive(new_resource.recursive)
+
+        if Chef::Config.target_mode?
+          # In target mode the registry is on the remote target; skip local Win32 access.
+          values_to_hash([])
+          return current_resource
+        end
+
+        running_on_windows!
         if registry.key_exists?(new_resource.key)
           current_registry_values = registry.get_values(new_resource.key) || []
 
@@ -79,6 +86,8 @@ class Chef
       end
 
       def define_resource_requirements
+        return if Chef::Config.target_mode?
+
         requirements.assert(:create, :create_if_missing, :delete, :delete_key) do |a|
           a.assertion { registry.hive_exists?(new_resource.key) }
           a.failure_message(Chef::Exceptions::Win32RegHiveMissing, "Hive #{new_resource.key.split("\\").shift} does not exist")
