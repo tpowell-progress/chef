@@ -138,6 +138,19 @@ PATH
       wmi-lite (~> 1.0)
 
 PATH
+  remote: /Users/powell/projects/target-mode-winrm/target-mode-premium
+  specs:
+    target_mode_premium (0.1.0)
+      chef (>= 18.0.0)
+
+PATH
+  remote: /Users/powell/projects/target-mode-winrm/target-mode-windows
+  specs:
+    target_mode_windows (0.1.0)
+      chef (>= 18.0.0)
+      target_mode_premium (>= 0.1.0)
+
+PATH
   remote: chef-bin
   specs:
     chef-bin (19.4.35)
@@ -598,6 +611,8 @@ DEPENDENCIES
   repl_type_completor (~> 0.1.15)
   rest-client!
   rspec
+  target_mode_premium!
+  target_mode_windows!
   webmock
 
 BUNDLED WITH

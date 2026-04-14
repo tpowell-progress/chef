@@ -25,6 +25,10 @@ class Chef
     class RegistryKey < Chef::Resource
 
       provides(:registry_key) { true }
+      provides :registry_key, os: "windows", target_mode: true
+
+      target_mode support: :full,
+                  description: "registry_key executes registry operations remotely via WinRM using PowerShell cmdlets."
 
       description "Use the **registry_key** resource to create and delete registry keys in Microsoft Windows. Note: 64-bit versions of Microsoft Windows have a 32-bit compatibility layer in the registry that reflects and redirects certain keys (and their values) into specific locations (or logical views) of the registry hive.\n\n#{ChefUtils::Dist::Infra::PRODUCT} can access any reflected or redirected registry key. The machine architecture of the system on which #{ChefUtils::Dist::Infra::PRODUCT} is running is used as the default (non-redirected) location. Access to the SysWow64 location is redirected must be specified. Typically, this is only necessary to ensure compatibility with 32-bit applications that are running on a 64-bit operating system.\n\nFor more information, see: [Registry Reflection](https://docs.microsoft.com/en-us/windows/win32/winprog64/registry-reflection)."
       examples <<~'DOC'

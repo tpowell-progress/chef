@@ -24,7 +24,7 @@ class Chef
     class PowershellScript < Chef::Provider::WindowsScript
       # FIXME: use composition not inheritance
 
-      provides :powershell_script
+      provides :powershell_script, target_mode: true
 
       action :run do
         Chef::Log.debug("using inline impl: #{new_resource.use_inline_powershell}")
@@ -56,10 +56,12 @@ class Chef
         ].join(" ")
       end
 
+      def input
+        super
+      end
+
       protected
 
-      # Run the inline version of powershell, using powershell_exec rather than powershell_out - this should
-      # hopefully
       def run_using_powershell_exec
         # Because of the nature of powershell_exec, we can't easily stream data to the shell, so we just flat out
         # disallow this combination
