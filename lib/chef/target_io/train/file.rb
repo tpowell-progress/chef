@@ -166,8 +166,7 @@ module TargetIO
           if %i{stat lstat}.include? m
             Chef::Log.debug "File::#{m} passed to Train.file.stat"
 
-            follow_symlink = m == :stat
-            tfile = transport_connection.file(args[0], follow_symlink).stat
+            tfile = transport_connection.file(args[0]).stat
 
             require "ostruct" unless defined?(OpenStruct)
             OpenStruct.new(tfile)

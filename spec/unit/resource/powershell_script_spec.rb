@@ -40,6 +40,13 @@ describe Chef::Resource::PowershellScript do
     expect(resource.convert_boolean_return).to eq(false)
   end
 
+  it "declares full target mode support" do
+    expect(resource.class.target_mode).to eq(
+      support: :full,
+      description: "Requires PowerShell available on the target node."
+    )
+  end
+
   it "returns the value for convert_boolean_return that was set" do
     resource.convert_boolean_return true
     expect(resource.convert_boolean_return).to eq(true)
