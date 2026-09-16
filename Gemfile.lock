@@ -138,17 +138,17 @@ PATH
       wmi-lite (~> 1.0)
 
 PATH
-  remote: /Users/powell/projects/target-mode-winrm/target-mode-premium
+  remote: /Users/powell/projects/chef-extensions-workspace/chef-premium-extensions
   specs:
-    target_mode_premium (0.1.0)
+    chef_premium_extensions (0.1.0)
       chef (>= 18.0.0)
 
 PATH
-  remote: /Users/powell/projects/target-mode-winrm/target-mode-windows
+  remote: /Users/powell/projects/chef-extensions-workspace/agentless-windows-extensions
   specs:
-    target_mode_windows (0.1.0)
+    agentless_windows_extensions (0.1.0)
       chef (>= 18.0.0)
-      target_mode_premium (>= 0.1.0)
+      chef_premium_extensions (>= 0.1.0)
 
 PATH
   remote: chef-bin
@@ -588,6 +588,7 @@ PLATFORMS
   x86_64-darwin-23
 
 DEPENDENCIES
+  agentless_windows_extensions!
   appbundler
   chef!
   chef-bin!
@@ -595,6 +596,7 @@ DEPENDENCIES
   chef-ruby-shadow (~> 3.0.0)
   chef-utils!
   chef-vault
+  chef_premium_extensions!
   cheffish!
   cookstyle (>= 9.0)
   crack (~> 1.0.1)
@@ -611,8 +613,6 @@ DEPENDENCIES
   repl_type_completor (~> 0.1.15)
   rest-client!
   rspec
-  target_mode_premium!
-  target_mode_windows!
   webmock
 
 BUNDLED WITH

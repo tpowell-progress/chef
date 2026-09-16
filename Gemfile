@@ -16,23 +16,23 @@ gem "chef-utils", path: File.expand_path("chef-utils", __dir__) if File.exist?(F
 gem "chef-config", path: File.expand_path("chef-config", __dir__) if File.exist?(File.expand_path("chef-config", __dir__))
 
 # 
-# Premium target mode gems (local paths until published)
+# Premium extensions gems (local paths until published)
 install_if -> {
-  ENV["CHEF_PREMIUM_TARGET_MODE_ENABLED"]&.downcase == "true" &&
-    File.exist?(File.expand_path("../target-mode-premium", __dir__))
+  ENV["CHEF_PREMIUM_EXTENSIONS_ENABLED"]&.downcase == "true" &&
+    File.exist?(File.expand_path("../chef-premium-extensions", __dir__))
 } do
-  gem "target_mode_premium", path: File.expand_path("../target-mode-premium", __dir__)
+  gem "chef_premium_extensions", path: File.expand_path("../chef-premium-extensions", __dir__)
 end
 
 install_if -> {
-  ENV["CHEF_PREMIUM_TARGET_MODE_ENABLED"]&.downcase == "true" &&
+  ENV["CHEF_PREMIUM_EXTENSIONS_ENABLED"]&.downcase == "true" &&
     (
       ENV["CHEF_TARGET_MODE_PLATFORM"]&.downcase == "windows" ||
       RUBY_PLATFORM.match?(/mingw|mswin|windows/i)
     ) &&
-    File.exist?(File.expand_path("../target-mode-windows", __dir__))
+    File.exist?(File.expand_path("../agentless-windows-extensions", __dir__))
 } do
-  gem "target_mode_windows", path: File.expand_path("../target-mode-windows", __dir__)
+  gem "agentless_windows_extensions", path: File.expand_path("../agentless-windows-extensions", __dir__)
 end
 
 # required for FIPS or bundler will pick up default openssl

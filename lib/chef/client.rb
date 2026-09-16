@@ -598,10 +598,10 @@ class Chef
     def setup_targetmode
       TargetIO::FileUtils.mkdir_p(Chef::Config[:file_cache_path])
       
-      # Load premium target mode framework if available
+      # Load premium extensions framework if available
       begin
-        require "target_mode_premium"
-        TargetModePremium::Loader.load!
+        require "chef_premium_extensions"
+        ChefPremiumExtensions::Loader.load!
       rescue LoadError
         # Premium framework not installed; OSS behavior unchanged
       end
